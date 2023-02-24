@@ -1,0 +1,45 @@
+package com.example.dogshelter.mapper;
+
+import com.example.dogshelter.domain.Volunteer;
+import com.example.dogshelter.dto.VolunteerDto;
+import lombok.Getter;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@Getter
+public class VolunteerMapper {
+
+    public VolunteerDto mapToVolunteerDto(Volunteer volunteer) {
+        return new VolunteerDto(
+                volunteer.getId(),
+                volunteer.getFirstName(),
+                volunteer.getLastName(),
+                volunteer.getLogin(),
+                volunteer.getPassword(),
+                volunteer.getEmail(),
+                volunteer.getPhone());
+    }
+
+    public Volunteer mapToVolunteer(VolunteerDto volunteerDto) {
+        Volunteer volunteer = new Volunteer();
+        volunteer.setFirstName(volunteer.getFirstName());
+        volunteer.setLastName(volunteer.getLastName());
+        volunteer.setLogin(volunteer.getLogin());
+        volunteer.setPassword(volunteer.getPassword());
+        volunteer.setEmail(volunteer.getEmail());
+        volunteer.setPhone(volunteer.getPhone());
+        return volunteer;
+    }
+
+    public List<VolunteerDto> mapToVolunteerDtoList(List<Volunteer> volunteerList){
+        return volunteerList.stream().map(this::mapToVolunteerDto).collect(Collectors.toList());
+    }
+
+    public List<Volunteer> mapToVolunteerList(List<VolunteerDto> volunteerDto){
+        return volunteerDto.stream().map(this::mapToVolunteer).collect(Collectors.toList());
+    }
+
+}
