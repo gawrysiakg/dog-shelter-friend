@@ -2,9 +2,14 @@ package com.example.dogshelter.mapper;
 
 import com.example.dogshelter.domain.DogBreed;
 import com.example.dogshelter.dto.DogBreedDto;
+import lombok.Getter;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@Getter
 public class DogBreedMapper {
 
     public DogBreedDto mapToDogBreedDto(DogBreed breed) {

@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "IMAGE")
 public class Image {
@@ -19,15 +18,15 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
     private Long id;
-    @Column(name = "IMAGE_ADDRESS")
+    @Column(name = "IMAGE_URL")
     private String imageAddress;
 
-   // public Image(String imageAddress) {
-    //    this.imageAddress = imageAddress;
-  //  }
+    public Image(String imageAddress) {
+        this.imageAddress = imageAddress;
+   }
 
-//    public Image() {
-//    }
+   public Image() {
+    }
 
 
     public Long getId() {

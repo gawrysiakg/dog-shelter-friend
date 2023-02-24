@@ -12,5 +12,5 @@ public enum DogBreed {
     MINIATURE_PINSCHER,
     ROTTWEILER,
     SAINT_BERNARD,
-    SHIH_TZU
+    SHIH_TZU,
 }

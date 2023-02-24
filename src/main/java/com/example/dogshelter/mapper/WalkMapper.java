@@ -5,9 +5,11 @@ import com.example.dogshelter.domain.Volunteer;
 import com.example.dogshelter.domain.Walk;
 import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.dto.WalkDto;
+import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.repository.DogRepository;
 import com.example.dogshelter.repository.VolunteerRepository;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +18,13 @@ import java.util.stream.Collectors;
 
 @Getter
 @Service
+@RequiredArgsConstructor
 public class WalkMapper {
 
-    @Autowired
-    DogRepository dogRepository;
-    @Autowired
-    VolunteerRepository volunteerRepository;
+    private final DogRepository dogRepository;
+    private final VolunteerRepository volunteerRepository;
 
-    WalkDto mapToWalkDto(Walk walk) {
+    public WalkDto mapToWalkDto(Walk walk) {
         return new WalkDto(
                 walk.getId(),
                 walk.getExitTime(),
@@ -32,7 +33,7 @@ public class WalkMapper {
                 walk.getVolunteer().getId());
     }
 
-    Walk mapToWalk(WalkDto walkDto) {
+    public Walk mapToWalk(WalkDto walkDto) {
         Dog dog = dogRepository.findById(walkDto.getDogId()).get();
         Volunteer volunteer = volunteerRepository.findById(walkDto.getVolunteerId()).get();
         Walk walk = new Walk();
@@ -43,11 +44,11 @@ public class WalkMapper {
         return walk;
     }
 
-    List<WalkDto> mapToWalkDtoList(List<Walk> walkList){
+    public List<WalkDto> mapToWalkDtoList(List<Walk> walkList){
         return walkList.stream().map(this::mapToWalkDto).collect(Collectors.toList());
     }
 
-    List<Walk> mapToWalkList(List<WalkDto> walkDtoList){
+    public List<Walk> mapToWalkList(List<WalkDto> walkDtoList){
         return walkDtoList.stream().map(this::mapToWalk).collect(Collectors.toList());
     }
 }

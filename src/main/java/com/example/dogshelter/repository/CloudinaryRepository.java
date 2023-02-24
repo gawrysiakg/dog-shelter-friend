@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CloudinaryRepository extends CrudRepository<Image, Long> {
+
+    void deleteByImageAddress(String url);
 }
