@@ -14,8 +14,9 @@ public class VolunteerDto {
     private Long id;
     private String firstName;
     private String lastName;
-    private String login;
+    private String name;
     private String password;
+    private String role;
     private String email;
     private int phone;
 }

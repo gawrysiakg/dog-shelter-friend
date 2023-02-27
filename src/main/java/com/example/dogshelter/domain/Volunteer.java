@@ -27,11 +27,14 @@ public class Volunteer {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "LOGIN")
-    private String login;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "ROLE")
+    private String role;
 
     @Column(name = "EMAIL")
     private String email;

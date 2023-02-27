@@ -1,6 +1,5 @@
 package com.example.dogshelter.controller;
 
-import com.example.dogshelter.domain.DogBreed;
 import com.example.dogshelter.dto.DogBreedDto;
 import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.exception.DogNotFoundException;
@@ -26,12 +25,17 @@ public class DogController {
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DogDto>> getDogsByBreed(@RequestBody DogBreedDto breed){
-        return ResponseEntity.ok(dogFacade.getAllDogsByBreed(breed));
+        return ResponseEntity.ok(dogFacade.getAllDogsByBreed(breed.getBreed()));
     }
 
     @GetMapping(value = "{dogId}")
     public ResponseEntity<DogDto> getDog(@PathVariable Long dogId) throws DogNotFoundException {
-        return ResponseEntity.ok(dogFacade.getDog(dogId));
+        return ResponseEntity.ok(dogFacade.getDogById(dogId));
+    }
+
+    @GetMapping(value = "{name}")
+    public ResponseEntity<DogDto> getDogByName(@PathVariable String name) throws DogNotFoundException {
+        return ResponseEntity.ok(dogFacade.getDogByName(name));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +49,7 @@ public class DogController {
         return ResponseEntity.ok(dogFacade.updateDog(dogDto));
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteDog(@PathVariable Long id) throws DogNotFoundException {
         dogFacade.deleteDog(id);
         return ResponseEntity.ok().build();

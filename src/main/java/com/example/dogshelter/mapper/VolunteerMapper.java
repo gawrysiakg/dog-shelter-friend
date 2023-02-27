@@ -17,20 +17,22 @@ public class VolunteerMapper {
                 volunteer.getId(),
                 volunteer.getFirstName(),
                 volunteer.getLastName(),
-                volunteer.getLogin(),
+                volunteer.getName(),
                 volunteer.getPassword(),
+                volunteer.getRole(),
                 volunteer.getEmail(),
                 volunteer.getPhone());
     }
 
     public Volunteer mapToVolunteer(VolunteerDto volunteerDto) {
         Volunteer volunteer = new Volunteer();
-        volunteer.setFirstName(volunteer.getFirstName());
-        volunteer.setLastName(volunteer.getLastName());
-        volunteer.setLogin(volunteer.getLogin());
-        volunteer.setPassword(volunteer.getPassword());
-        volunteer.setEmail(volunteer.getEmail());
-        volunteer.setPhone(volunteer.getPhone());
+        volunteer.setFirstName(volunteerDto.getFirstName());
+        volunteer.setLastName(volunteerDto.getLastName());
+        volunteer.setName(volunteerDto.getName());
+        volunteer.setPassword(volunteerDto.getPassword());
+        volunteer.setRole(volunteerDto.getRole());
+        volunteer.setEmail(volunteerDto.getEmail());
+        volunteer.setPhone(volunteerDto.getPhone());
         return volunteer;
     }
 

@@ -31,7 +31,7 @@ public class VolunteerController {
 
     @GetMapping(value = "/login/{login}")
     public ResponseEntity<VolunteerDto> getVolunteerByLogin(@PathVariable String login) throws VolunteerNotFoundException {
-        return ResponseEntity.ok(volunteerFacade.getVolunteerByLogin(login));
+        return ResponseEntity.ok(volunteerFacade.getVolunteerByName(login));
     }
 
     @GetMapping(value = "/email/{mail}")

@@ -1,7 +1,5 @@
 package com.example.dogshelter.dto;
 
-import com.example.dogshelter.domain.DogBreed;
-import com.example.dogshelter.domain.DogStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,6 @@ public class DogDto {
 
     private Long id;
     private String name;
-    private DogBreed dogBreed;
-    private DogStatus dogStatus;
+    private String breed;
+    private boolean inShelter;
 }

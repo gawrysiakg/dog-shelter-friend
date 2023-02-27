@@ -26,10 +26,10 @@ public class Dog {
     private String name;
 
     @Column(name = "DOG_BREAD")
-    private DogBreed dogBreed;
+    private String dogBreed;
 
-    @Column(name = "DOG_STATUS")
-    private DogStatus dogStatus;
+    @Column(name = "IN_SHELTER")
+    private boolean inShelter;
 
     @OneToMany(targetEntity = Walk.class,
             cascade = CascadeType.ALL,
@@ -37,6 +37,6 @@ public class Dog {
             mappedBy = "dog")
     private List<Walk> walksList=new ArrayList<>();
 
-    public Dog(String name, DogBreed dogBreed, DogStatus dogStatus) {
+    public Dog(String name, String dogBreed, boolean inShelter) {
     }
 }

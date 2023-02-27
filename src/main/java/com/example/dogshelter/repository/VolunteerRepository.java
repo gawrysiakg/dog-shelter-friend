@@ -13,7 +13,7 @@ public interface VolunteerRepository extends CrudRepository<Volunteer, Long> {
     @Override
     List<Volunteer> findAll();
 
-    Optional<Volunteer> findVolunteerByLogin(String login);
+    Optional<Volunteer> findVolunteerByName(String login);
 
     Optional<Volunteer> findVolunteerByEmail(String mail);
 

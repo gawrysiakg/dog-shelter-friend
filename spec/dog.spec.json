@@ -1,0 +1,20 @@
+[
+  {
+    "id": 18,
+    "name": "Benny",
+    "breed": "mixed",
+    "inShelter": true
+  },
+  {
+    "id": 19,
+    "name": "Tonny",
+    "breed": "mixed",
+    "inShelter": true
+  },
+  {
+    "id": 20,
+    "name": "Boss",
+    "breed": "mixed",
+    "inShelter": false
+  }
+]

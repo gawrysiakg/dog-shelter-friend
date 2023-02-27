@@ -25,8 +25,8 @@ public class VolunteerFacade {
         return volunteerMapper.mapToVolunteerDto(volunteerService.getVolunteerById(id));
     }
 
-    public VolunteerDto getVolunteerByLogin(String login) throws VolunteerNotFoundException {
-        return volunteerMapper.mapToVolunteerDto(volunteerService.getVolunteerByLogin(login));
+    public VolunteerDto getVolunteerByName(String login) throws VolunteerNotFoundException {
+        return volunteerMapper.mapToVolunteerDto(volunteerService.getVolunteerByName(login));
     }
 
     public VolunteerDto getVolunteerByEmail(String mail) throws VolunteerNotFoundException {

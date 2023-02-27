@@ -1,7 +1,6 @@
 package com.example.dogshelter.service;
 
 import com.example.dogshelter.domain.Dog;
-import com.example.dogshelter.domain.DogBreed;
 import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.repository.DogRepository;
@@ -21,7 +20,7 @@ public class DogService {
         return dogRepository.findAll();
     }
 
-    public List<Dog> getAllDogsByBreed(DogBreed breed) {
+    public List<Dog> getAllDogsByBreed(String breed) {
         return dogRepository.findAllByDogBreed(breed);
     }
 
@@ -35,8 +34,8 @@ public class DogService {
 
     public Dog updateDog(final DogDto dogDto) throws DogNotFoundException {
         Dog dog = dogRepository.findById(dogDto.getId()).orElseThrow(DogNotFoundException::new);
-        dog.setDogStatus(dogDto.getDogStatus());
-        dog.setDogBreed(dogDto.getDogBreed());
+        dog.setInShelter(dogDto.isInShelter());
+        dog.setDogBreed(dogDto.getBreed());
         dog.setName(dogDto.getName());
         return dogRepository.save(dog);
     }
@@ -50,4 +49,7 @@ public class DogService {
     }
 
 
+    public Dog getDogByName(String name) throws DogNotFoundException {
+        return dogRepository.findDogByName(name).orElseThrow(DogNotFoundException::new);
+    }
 }

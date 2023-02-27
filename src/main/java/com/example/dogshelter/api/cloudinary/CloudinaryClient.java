@@ -3,6 +3,8 @@ package com.example.dogshelter.api.cloudinary;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.dogshelter.domain.Image;
+import com.example.dogshelter.dto.ImageDto;
+import com.example.dogshelter.mapper.ImageMapper;
 import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,13 @@ public class CloudinaryClient {
     private Cloudinary cloudinary;
     private CloudinaryRepository cloudinaryRepository;
     private CloudinaryConfig cloudinaryConfig;
+    private ImageMapper imageMapper;
 
     @Autowired
-    public CloudinaryClient(CloudinaryRepository cloudinaryRepository, CloudinaryConfig cloudinaryConfig){
+    public CloudinaryClient(CloudinaryRepository cloudinaryRepository, CloudinaryConfig cloudinaryConfig, ImageMapper imageMapper){
             this.cloudinaryRepository=cloudinaryRepository;
             this.cloudinaryConfig=cloudinaryConfig;
+            this.imageMapper=imageMapper;
             cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", cloudinaryConfig.getCloudNameValue(),
                 "api_key", cloudinaryConfig.getApiKeyValue(),
@@ -34,17 +38,19 @@ public class CloudinaryClient {
     }
 
 
-    public String uploadFileAndSaveToDb(String path) {
+    public ImageDto uploadFileAndSaveToDb(String path) throws IOException {
         File file = new File(path);
         Map uploadResult = null;
-        try {
+       // try {
             uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-            cloudinaryRepository.save(new Image(uploadResult.get("url").toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            // todo
-        }
-        return uploadResult.get("url").toString();
+            Image savedImage = cloudinaryRepository.save(new Image(uploadResult.get("url").toString()));
+            return imageMapper.mapToImageDto(savedImage);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            // todo
+//        }
+       // return new ImageDto("https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png");
+
     }
 
 

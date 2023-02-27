@@ -23,8 +23,8 @@ public class VolunteerService {
         return volunteerRepository.findById(id).orElseThrow(VolunteerNotFoundException::new);
     }
 
-    public Volunteer getVolunteerByLogin(String login) throws VolunteerNotFoundException {
-        return volunteerRepository.findVolunteerByLogin(login).orElseThrow(VolunteerNotFoundException::new);
+    public Volunteer getVolunteerByName(String login) throws VolunteerNotFoundException {
+        return volunteerRepository.findVolunteerByName(login).orElseThrow(VolunteerNotFoundException::new);
     }
 
     public Volunteer getVolunteerByEmail(String mail) throws VolunteerNotFoundException {
@@ -37,7 +37,7 @@ public class VolunteerService {
 
     public Volunteer updateVolunteer(VolunteerDto volunteerDto) throws VolunteerNotFoundException {
         Volunteer volunteerFromRepo = volunteerRepository.findById(volunteerDto.getId()).orElseThrow(VolunteerNotFoundException::new);
-        volunteerFromRepo.setLogin(volunteerDto.getLogin());
+        volunteerFromRepo.setName(volunteerDto.getName());
         volunteerFromRepo.setPassword(volunteerDto.getPassword());
         volunteerFromRepo.setFirstName(volunteerDto.getFirstName());
         volunteerFromRepo.setLastName(volunteerDto.getLastName());

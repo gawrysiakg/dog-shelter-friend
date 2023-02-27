@@ -1,16 +1,23 @@
-package com.example.dogshelter.domain;
-
-public enum DogBreed {
-    MIXED,
-    BEAGLE,
-    BOXER,
-    BULL_TERRIER,
-    DOBERMAN,
-    GERMAN_SHEPHERD,
-    HUSKY,
-    LABRADOR_RETRIEVER,
-    MINIATURE_PINSCHER,
-    ROTTWEILER,
-    SAINT_BERNARD,
-    SHIH_TZU,
-}
+//package com.example.dogshelter.domain;
+//
+//public enum DogBreed {
+//    MIXED("Mixed"),
+//    BEAGLE("Beagle"),
+//    BOXER("Boxer"),
+//    BULL_TERRIER("Bull terrier"),
+//    DOBERMAN("Doberman"),
+//    GERMAN_SHEPHERD("German shepard"),
+//    HUSKY("Husky"),
+//    LABRADOR_RETRIEVER("Labrador Retriever"),
+//    MINIATURE_PINSCHER("Miniature pincher"),
+//    ROTTWEILER("Rottweiler"),
+//    SAINT_BERNARD("Saint Bernard"),
+//    SHIH_TZU("Shih tzu");
+//
+//
+//    private final String translation;
+//
+//    DogBreed(String t) {
+//        translation = t;
+//    }
+//}
