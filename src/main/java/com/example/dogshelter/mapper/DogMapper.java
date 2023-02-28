@@ -14,13 +14,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DogMapper {
 
-   // private final DogBreedMapper dogBreedMapper;
+
     public DogDto mapToDogDto(Dog dog) {
         return new DogDto(
                 dog.getId(),
                 dog.getName(),
                 dog.getDogBreed(),
                 dog.isInShelter());
+
     }
 
     public Dog mapToDog(DogDto dogDto) {

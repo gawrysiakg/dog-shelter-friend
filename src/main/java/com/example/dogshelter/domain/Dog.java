@@ -31,6 +31,9 @@ public class Dog {
     @Column(name = "IN_SHELTER")
     private boolean inShelter;
 
+
+
+
     @OneToMany(targetEntity = Walk.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
@@ -38,5 +41,9 @@ public class Dog {
     private List<Walk> walksList=new ArrayList<>();
 
     public Dog(String name, String dogBreed, boolean inShelter) {
+        this.name = name;
+        this.dogBreed = dogBreed;
+        this.inShelter = inShelter;
+
     }
 }

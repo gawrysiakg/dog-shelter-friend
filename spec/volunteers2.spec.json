@@ -1,0 +1,33 @@
+[
+  {
+  "id": 34,
+  "firstName": "Adam",
+  "lastName": "Biały",
+  "name": "dogers",
+  "password": "admin",
+  "role": "ADMIN",
+  "email": "dogers@dsf.pl",
+  "phone": 544844866
+  },
+  {
+    "id": 35,
+    "firstName": "Damian",
+    "lastName": "Nowak",
+    "name": "volunteer1",
+    "password": "user",
+    "role": "USER",
+    "email": "user@dsf.pl",
+    "phone": 600658877
+  },
+  {
+    "id": 36,
+    "firstName": "Sylwia",
+    "lastName": "Tymosik",
+    "name": "volunteer2",
+    "password": "user2",
+    "role": "USER",
+    "email": "user2@dsf.pl",
+    "phone": 500457745
+  }
+
+]

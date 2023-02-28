@@ -1,0 +1,34 @@
+[
+{
+
+  "id":1,
+  "name": "dogers",
+  "password": "admin",
+  "email": "dogers@dsf.pl",
+  "role": "ADMIN"
+
+},
+
+{
+
+  "id":2,
+  "name": "volunteer1",
+  "password": "user",
+  "email": "user@dsf.pl",
+  "role": "USER"
+
+},
+
+  {
+
+    "id":3,
+    "name": "volunteer2",
+    "password": "user2",
+    "email": "user2@dsf.pl",
+    "role": "USER"
+
+  }
+
+
+
+]
