@@ -1,5 +1,6 @@
 package com.example.dogshelter.service;
 
+import com.example.dogshelter.domain.Role;
 import com.example.dogshelter.domain.Volunteer;
 import com.example.dogshelter.dto.VolunteerDto;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
@@ -34,6 +35,7 @@ public class VolunteerService {
     public Volunteer addVolunteer(Volunteer volunteer) {
         return volunteerRepository.save(volunteer);
     }
+
 
     public Volunteer updateVolunteer(VolunteerDto volunteerDto) throws VolunteerNotFoundException {
         Volunteer volunteerFromRepo = volunteerRepository.findById(volunteerDto.getId()).orElseThrow(VolunteerNotFoundException::new);
