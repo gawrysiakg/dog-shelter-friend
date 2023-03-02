@@ -28,13 +28,28 @@ public class VolunteerMapper {
 
     public Volunteer mapToVolunteer(VolunteerDto volunteerDto) {
         Volunteer volunteer = new Volunteer();
-        volunteer.setFirstName(volunteerDto.getFirstName());
-        volunteer.setLastName(volunteerDto.getLastName());
-        volunteer.setName(volunteerDto.getName());
-        volunteer.setPassword(volunteerDto.getPassword());
-        volunteer.setRole(volunteerDto.getRole());
-        volunteer.setEmail(volunteerDto.getEmail());
-        volunteer.setPhone(volunteerDto.getPhone());
+        if(!(volunteerDto.getFirstName()==null)){
+            volunteer.setFirstName(volunteerDto.getFirstName());
+        }
+        if(!(volunteerDto.getLastName()==null)){
+            volunteer.setLastName(volunteerDto.getLastName());
+        }
+        if(!(volunteerDto.getName()==null)){
+            volunteer.setName(volunteerDto.getName());
+        }
+        if(!(volunteerDto.getPassword()==null)){
+            volunteer.setPassword(volunteerDto.getPassword());
+        }
+        if(!(volunteerDto.getRole()==null)){
+            volunteer.setRole(volunteerDto.getRole());
+        }
+        if(!(volunteerDto.getEmail()==null)){
+            volunteer.setEmail(volunteerDto.getEmail());
+        }
+        if(!(volunteerDto.getPhone()==0)){
+            volunteer.setPhone(volunteerDto.getPhone());
+        }
+
         return volunteer;
     }
 
