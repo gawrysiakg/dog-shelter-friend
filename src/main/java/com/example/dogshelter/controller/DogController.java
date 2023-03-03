@@ -44,7 +44,7 @@ public class DogController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DogDto> updateDog(@RequestBody DogDto dogDto) throws DogNotFoundException {
         return ResponseEntity.ok(dogFacade.updateDog(dogDto));
     }

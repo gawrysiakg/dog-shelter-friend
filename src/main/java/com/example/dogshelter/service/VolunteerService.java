@@ -1,6 +1,5 @@
 package com.example.dogshelter.service;
 
-import com.example.dogshelter.domain.Role;
 import com.example.dogshelter.domain.Volunteer;
 import com.example.dogshelter.dto.VolunteerDto;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
@@ -44,8 +43,8 @@ public class VolunteerService {
         volunteerFromRepo.setName(volunteerDto.getName());
         volunteerFromRepo.setPassword(volunteerDto.getPassword());
         volunteerFromRepo.setPhone(volunteerDto.getPhone());
-        volunteerFromRepo.setEmail(volunteerFromRepo.getEmail());
-        volunteerFromRepo.setRole(volunteerFromRepo.getRole());
+        volunteerFromRepo.setEmail(volunteerDto.getEmail());
+        volunteerFromRepo.setRole(volunteerDto.getRole());
         return volunteerRepository.save(volunteerFromRepo);
     }
 
