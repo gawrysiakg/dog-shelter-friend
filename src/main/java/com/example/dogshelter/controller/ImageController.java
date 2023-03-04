@@ -1,18 +1,13 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.api.cloudinary.CloudinaryClient;
-import com.example.dogshelter.domain.Image;
 import com.example.dogshelter.dto.ImageDto;
-import com.example.dogshelter.dto.WalkDto;
-import com.example.dogshelter.exception.ImageNotFoundException;
-import com.example.dogshelter.exception.WalkNotFoundException;
 import com.example.dogshelter.facade.ImageFacade;
 import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.List;
 

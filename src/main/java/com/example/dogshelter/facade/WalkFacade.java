@@ -24,8 +24,12 @@ public class WalkFacade {
         return walkMapper.mapToWalkDtoList(walkService.findAllWalks());
     }
 
-    public List<WalkDto> getAllUnfinishedWalks() {
-        return walkMapper.mapToWalkDtoList(walkService.findAllRunningWalks());
+    public List<WalkDto> getAllPlannedWalks() {
+        return walkMapper.mapToWalkDtoList(walkService.findAllPlannedWalks());
+    }
+
+    public List<WalkDto> getPlannedWalksForVolunteer(String username) {
+        return walkMapper.mapToWalkDtoList(walkService.getPlannedWalksForVolunteer(username));
     }
 
     public WalkDto getWalk(Long id) throws WalkNotFoundException {
@@ -47,4 +51,6 @@ public class WalkFacade {
     public void finishWalk(WalkFinishDto walkFinishDto) throws WalkNotFoundException {
         walkService.finishWalk(walkFinishDto);
     }
+
+
 }

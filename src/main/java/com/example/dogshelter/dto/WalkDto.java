@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -13,8 +14,7 @@ import java.time.LocalDateTime;
 public class WalkDto {
 
     private Long id;
-    private LocalDateTime exitTime;
-    private LocalDateTime returnTime;
-    private Long dogId;
-    private Long volunteerId;
+    private LocalDate walkDate;
+    private String volunteerName;
+    private String dogName;
 }

@@ -6,6 +6,7 @@ import com.example.dogshelter.domain.Walk;
 import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.dto.WalkDto;
 import com.example.dogshelter.exception.DogNotFoundException;
+import com.example.dogshelter.exception.VolunteerNotFoundException;
 import com.example.dogshelter.repository.DogRepository;
 import com.example.dogshelter.repository.VolunteerRepository;
 import lombok.Getter;
@@ -27,20 +28,23 @@ public class WalkMapper {
     public WalkDto mapToWalkDto(Walk walk) {
         return new WalkDto(
                 walk.getId(),
-                walk.getExitTime(),
-                walk.getReturnTime(),
-                walk.getDog().getId(),
-                walk.getVolunteer().getId());
+                walk.getWalkDate(),
+                walk.getVolunteer().getName(),
+                walk.getDog().getName());
     }
 
-    public Walk mapToWalk(WalkDto walkDto) {
-        Dog dog = dogRepository.findById(walkDto.getDogId()).get();
-        Volunteer volunteer = volunteerRepository.findById(walkDto.getVolunteerId()).get();
+    public Walk mapToWalk(WalkDto walkDto)  {
         Walk walk = new Walk();
-        walk.setExitTime(walkDto.getExitTime());
-        walk.setReturnTime(walkDto.getReturnTime());
-        walk.setDog(dog);
-        walk.setVolunteer(volunteer);
+       try{
+           Dog dog = dogRepository.findDogByName(walkDto.getDogName()).orElseThrow(DogNotFoundException::new);
+           Volunteer volunteer = volunteerRepository.findVolunteerByName(walkDto.getVolunteerName()).orElseThrow(VolunteerNotFoundException::new);
+           walk.setWalkDate(walkDto.getWalkDate());
+           walk.setDog(dog);
+           walk.setVolunteer(volunteer);
+       } catch (DogNotFoundException| VolunteerNotFoundException exception){
+                exception.printStackTrace();
+        }
+
         return walk;
     }
 

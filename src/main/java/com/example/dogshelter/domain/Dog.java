@@ -32,8 +32,6 @@ public class Dog {
     private boolean inShelter;
 
 
-
-
     @OneToMany(targetEntity = Walk.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,

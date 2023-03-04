@@ -14,6 +14,7 @@ import com.example.dogshelter.repository.WalkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -28,8 +29,12 @@ public class WalkService {
         return walkRepository.findAll();
     }
 
-    public List<Walk> findAllRunningWalks() {
-        return walkRepository.findAllByReturnTimeIsNull();
+    public List<Walk> findAllPlannedWalks(){
+        return walkRepository.findAllByWalkDateIsAfter(LocalDate.now().minusDays(1));
+    }
+
+    public List<Walk> getPlannedWalksForVolunteer(String username){
+        return walkRepository.findAllByVolunteerNameAndWalkDateIsAfter(username, LocalDate.now().minusDays(1));
     }
 
     public Walk findWalk(Long id) throws WalkNotFoundException {
@@ -42,12 +47,10 @@ public class WalkService {
 
     public Walk updatedWalk(WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException, DogNotFoundException {
         Walk walkFromRepo = walkRepository.findById(walkDto.getId()).orElseThrow(WalkNotFoundException::new);
-        Volunteer volunteerFromRepo = volunteerRepository.findById(walkDto.getVolunteerId()).orElseThrow(VolunteerNotFoundException::new);
-        Dog dogFromRepo = dogRepository.findById(walkDto.getDogId()).orElseThrow(DogNotFoundException::new);
+        Volunteer volunteerFromRepo = volunteerRepository.findVolunteerByName(walkDto.getVolunteerName()).orElseThrow(VolunteerNotFoundException::new);
+        Dog dogFromRepo = dogRepository.findDogByName(walkDto.getDogName()).orElseThrow(DogNotFoundException::new);
         walkFromRepo.setVolunteer(volunteerFromRepo);
         walkFromRepo.setDog(dogFromRepo);
-        walkFromRepo.setExitTime(walkDto.getExitTime());
-        walkFromRepo.setReturnTime(walkFromRepo.getReturnTime());
         return walkRepository.save(walkFromRepo);
     }
 
@@ -61,7 +64,11 @@ public class WalkService {
 
     public void finishWalk(WalkFinishDto walkFinishDto) throws WalkNotFoundException {
         Walk walk = walkRepository.findById(walkFinishDto.getWalkId()).orElseThrow(WalkNotFoundException::new);
-        walk.setReturnTime(walkFinishDto.getReturnTime());
+
         walkRepository.save(walk);
+    }
+
+    public List<Walk> findAllRunningWalks() {
+        return walkRepository.findAllByWalkDateIsAfter(LocalDate.now().minusDays(1L));
     }
 }
