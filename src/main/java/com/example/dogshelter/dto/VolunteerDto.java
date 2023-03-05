@@ -1,5 +1,6 @@
 package com.example.dogshelter.dto;
 
+import com.example.dogshelter.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class VolunteerDto {
     private String lastName;
     private String name;
     private String password;
-    private String role;
     private String email;
     private int phone;
+    private Role role;
 }

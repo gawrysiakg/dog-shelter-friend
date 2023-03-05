@@ -18,7 +18,7 @@ import java.util.List;
 public class Dog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private Long id;
 
@@ -32,10 +32,8 @@ public class Dog {
     private boolean inShelter;
 
 
-
-
     @OneToMany(targetEntity = Walk.class,
-            cascade = CascadeType.ALL,
+           // cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             mappedBy = "dog")
     private List<Walk> walksList=new ArrayList<>();

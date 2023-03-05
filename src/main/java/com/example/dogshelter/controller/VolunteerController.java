@@ -46,7 +46,7 @@ public class VolunteerController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VolunteerDto> updateVolunteer(@RequestBody VolunteerDto volunteerDto) throws VolunteerNotFoundException {
         return ResponseEntity.ok(volunteerFacade.updateVolunteer(volunteerDto));
     }

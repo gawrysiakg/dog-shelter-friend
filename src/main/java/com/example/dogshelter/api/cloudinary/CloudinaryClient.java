@@ -8,7 +8,6 @@ import com.example.dogshelter.mapper.ImageMapper;
 import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 
@@ -41,16 +40,9 @@ public class CloudinaryClient {
     public ImageDto uploadFileAndSaveToDb(String path) throws IOException {
         File file = new File(path);
         Map uploadResult = null;
-       // try {
             uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
             Image savedImage = cloudinaryRepository.save(new Image(uploadResult.get("url").toString()));
             return imageMapper.mapToImageDto(savedImage);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            // todo
-//        }
-       // return new ImageDto("https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png");
-
     }
 
 

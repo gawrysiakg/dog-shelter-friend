@@ -35,6 +35,7 @@ public class VolunteerService {
         return volunteerRepository.save(volunteer);
     }
 
+
     public Volunteer updateVolunteer(VolunteerDto volunteerDto) throws VolunteerNotFoundException {
         Volunteer volunteerFromRepo = volunteerRepository.findById(volunteerDto.getId()).orElseThrow(VolunteerNotFoundException::new);
         volunteerFromRepo.setFirstName(volunteerDto.getFirstName());
@@ -42,8 +43,8 @@ public class VolunteerService {
         volunteerFromRepo.setName(volunteerDto.getName());
         volunteerFromRepo.setPassword(volunteerDto.getPassword());
         volunteerFromRepo.setPhone(volunteerDto.getPhone());
-        volunteerFromRepo.setEmail(volunteerFromRepo.getEmail());
-        volunteerFromRepo.setRole(volunteerFromRepo.getRole());
+        volunteerFromRepo.setEmail(volunteerDto.getEmail());
+        volunteerFromRepo.setRole(volunteerDto.getRole());
         return volunteerRepository.save(volunteerFromRepo);
     }
 

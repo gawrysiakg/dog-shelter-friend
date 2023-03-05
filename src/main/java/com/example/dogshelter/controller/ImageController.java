@@ -1,18 +1,13 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.api.cloudinary.CloudinaryClient;
-import com.example.dogshelter.domain.Image;
 import com.example.dogshelter.dto.ImageDto;
-import com.example.dogshelter.dto.WalkDto;
-import com.example.dogshelter.exception.ImageNotFoundException;
-import com.example.dogshelter.exception.WalkNotFoundException;
 import com.example.dogshelter.facade.ImageFacade;
 import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -32,9 +27,13 @@ public class ImageController {
         return ResponseEntity.ok(imageFacade.findAll());
     }
 
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
+//        return ResponseEntity.ok(cloudinaryClient.uploadFileAndSaveToDb(imageDto.getUrl()));
+//    }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
-        return ResponseEntity.ok(cloudinaryClient.uploadFileAndSaveToDb(imageDto.getUrl()));
+        return ResponseEntity.ok(imageFacade.uploadImage(imageDto));
     }
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
