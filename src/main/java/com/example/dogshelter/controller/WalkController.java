@@ -1,7 +1,6 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.dto.WalkDto;
-import com.example.dogshelter.dto.WalkFinishDto;
 import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
 import com.example.dogshelter.exception.WalkNotFoundException;
@@ -31,7 +30,7 @@ public class WalkController {
         return ResponseEntity.ok(walkFacade.getAllPlannedWalks());
     }
     @GetMapping(value = "/planned/{username}")
-    public ResponseEntity<List<WalkDto>> getPlannedWalksForVolunteer(String username){
+    public ResponseEntity<List<WalkDto>> getPlannedWalksForVolunteer(@PathVariable String username){
         return ResponseEntity.ok(walkFacade.getPlannedWalksForVolunteer(username));
     }
 
@@ -52,12 +51,12 @@ public class WalkController {
     }
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> finishWalk(@RequestBody WalkFinishDto walkFinishDto) throws WalkNotFoundException, VolunteerNotFoundException, DogNotFoundException {
-        walkFacade.finishWalk(walkFinishDto);
+    public ResponseEntity<Void> changeWalk(@RequestBody WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException, DogNotFoundException {
+        walkFacade.changeWalk(walkDto);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteWalk(@PathVariable Long id) throws WalkNotFoundException {
         walkFacade.deleteWalk(id);
         return ResponseEntity.ok().build();

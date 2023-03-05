@@ -1,7 +1,6 @@
 package com.example.dogshelter.facade;
 
 import com.example.dogshelter.dto.WalkDto;
-import com.example.dogshelter.dto.WalkFinishDto;
 import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
 import com.example.dogshelter.exception.WalkNotFoundException;
@@ -48,8 +47,8 @@ public class WalkFacade {
         walkService.deleteWalk(id);
     }
 
-    public void finishWalk(WalkFinishDto walkFinishDto) throws WalkNotFoundException {
-        walkService.finishWalk(walkFinishDto);
+    public void changeWalk(WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException, DogNotFoundException {
+        walkService.editWalk(walkDto);
     }
 
 

@@ -4,10 +4,12 @@ import com.example.dogshelter.domain.Walk;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface WalkRepository extends CrudRepository<Walk, Long> {
 
     @Override
@@ -17,4 +19,6 @@ public interface WalkRepository extends CrudRepository<Walk, Long> {
 
     List<Walk> findAllByVolunteerNameAndWalkDateIsAfter(String username, LocalDate localDate);
 
+    @Override
+    void deleteById(Long aLong);
 }

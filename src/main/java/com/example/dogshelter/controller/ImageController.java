@@ -27,9 +27,13 @@ public class ImageController {
         return ResponseEntity.ok(imageFacade.findAll());
     }
 
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
+//        return ResponseEntity.ok(cloudinaryClient.uploadFileAndSaveToDb(imageDto.getUrl()));
+//    }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
-        return ResponseEntity.ok(cloudinaryClient.uploadFileAndSaveToDb(imageDto.getUrl()));
+        return ResponseEntity.ok(imageFacade.uploadImage(imageDto));
     }
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
