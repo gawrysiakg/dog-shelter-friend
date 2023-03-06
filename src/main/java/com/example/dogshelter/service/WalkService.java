@@ -50,11 +50,15 @@ public class WalkService {
         simpleEmailService.send(
                 new Mail.MailBuilder()
                         .mailTo(adminConfig.getAdminMail())
-                        .subject("Volunteer "+walkSaved.getVolunteer().getName()+" registered new walk")
+                        .subject(getSubjectForNewWalk(walkSaved.getVolunteer().getName(),  "registered new walk"))
                         .message(walkSaved.getVolunteer().getName()+" registered new walk with "+ walkSaved.getDog().getName()+
                                 ", walk date: "+ walkSaved.getWalkDate())
                         .build());
 
+    }
+
+    private static String getSubjectForNewWalk(String volunteerName, String operation) {
+        return "Volunteer " + volunteerName + " " +operation;
     }
 
     public Walk updatedWalk(WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException, DogNotFoundException {
