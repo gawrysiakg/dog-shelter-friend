@@ -40,7 +40,7 @@ public class WalkController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> startNewWalk(@RequestBody WalkDto walkDto) {
+    public ResponseEntity<Void> startNewWalk(@RequestBody WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException {
         walkFacade.addNewWalk(walkDto);
         return ResponseEntity.ok().build();
     }

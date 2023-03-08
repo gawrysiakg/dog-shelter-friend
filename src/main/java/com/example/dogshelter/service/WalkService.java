@@ -29,6 +29,8 @@ public class WalkService {
     private final SimpleEmailService simpleEmailService;
     private final AdminConfig adminConfig;
 
+    public static final String SUBJECT = "New walk for volunteer";
+
     public List<Walk> findAllWalks() {
         return walkRepository.findAll();
     }
@@ -45,16 +47,10 @@ public class WalkService {
         return walkRepository.findById(id).orElseThrow(WalkNotFoundException::new);
     }
 
-    public void addNewWalk(Walk walk) {
+    public void addNewWalk(Walk walk) throws WalkNotFoundException, VolunteerNotFoundException {
         Walk walkSaved = walkRepository.save(walk);
-        simpleEmailService.send(
-                new Mail.MailBuilder()
-                        .mailTo(adminConfig.getAdminMail())
-                        .subject(getSubjectForNewWalk(walkSaved.getVolunteer().getName(),  "registered new walk"))
-                        .message(walkSaved.getVolunteer().getName()+" registered new walk with "+ walkSaved.getDog().getName()+
-                                ", walk date: "+ walkSaved.getWalkDate())
-                        .build());
-
+        sendConfirmToVolunteer(walk);
+        sendConfirmToAdmin(walkSaved);
     }
 
     private static String getSubjectForNewWalk(String volunteerName, String operation) {
@@ -108,5 +104,32 @@ public class WalkService {
 
     public List<Walk> findAllRunningWalks() {
         return walkRepository.findAllByWalkDateIsAfter(LocalDate.now().minusDays(1L));
+    }
+
+    private void sendConfirmToVolunteer(Walk walk) throws WalkNotFoundException, VolunteerNotFoundException {
+        Walk walk1 = walkRepository.findById(walk.getId()).orElseThrow(WalkNotFoundException::new);
+        Volunteer volunteer = volunteerRepository.findById(walk1.getId()).orElseThrow(VolunteerNotFoundException::new);
+        simpleEmailService.send(
+                new Mail.MailBuilder()
+                        .mailTo(volunteer.getEmail())
+                        .subject(SUBJECT)
+                        .message(SUBJECT+volunteer.getName()+" walk date: "
+                                +walk.getWalkDate() + " with dog "+walk1.getDog())
+                        .build());
+    }
+
+    private void sendConfirmToAdmin(Walk walkSaved){
+        simpleEmailService.send(
+                new Mail.MailBuilder()
+                        .mailTo(adminConfig.getAdminMail())
+                        .subject(getSubjectForNewWalk(walkSaved.getVolunteer().getName(),  "registered new walk"))
+                        .message(walkSaved.getVolunteer().getName()+" registered new walk with "+ walkSaved.getDog().getName()+
+                                ", walk date: "+ walkSaved.getWalkDate())
+                        .build());
+    }
+
+    public long count() {
+
+        return walkRepository.count();
     }
 }
