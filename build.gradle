@@ -29,6 +29,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
     implementation 'com.cloudinary:cloudinary-http44:1.33.0'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+    testImplementation 'com.google.code.gson:gson'
 }
 
 tasks.named('test') {
