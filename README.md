@@ -50,3 +50,5 @@ oraz:
     - Builder
     - Singleton
 
+###
+![Swagger](src/main/resources/image/swagger.png)]
