@@ -35,7 +35,7 @@ public class WalkFacade {
         return walkMapper.mapToWalkDto(walkService.findWalk(id));
     }
 
-    public void addNewWalk(WalkDto walkDto) {
+    public void addNewWalk(WalkDto walkDto) throws WalkNotFoundException, VolunteerNotFoundException {
         walkService.addNewWalk(walkMapper.mapToWalk(walkDto));
     }
 

@@ -1,5 +1,5 @@
 ## Dog Shelter Friend - backend
-
+Prezentacja filmowa:
 [![Watch the video](src/main/resources/image/shelter.png)](https://www.youtube.com/watch?v=cN8vlphUlVU)
 
 ## Opis projektu:
@@ -38,6 +38,8 @@ oraz:
 - Lombok
 - external Cloudinary API
 - JavaMailSender
+- Swagger
+- Scheduler
 
 ### Cechy aplikacji
 
@@ -45,10 +47,22 @@ oraz:
     - Cloudinary - upload zdjęć z dysku użytkownika, umieszczenie w serwisie Cloudinary, zapis adresów url do bazy danych, oraz wyświetlenie galerii zdjęć na stronie schroniska.
     - Prognoza pogody - wyświetlanie aktualnej pogody na stronie głównej, wysyłanie maili zachęcających do spaceru z pupilem, informujących też o pogodzie na najbliższe dni.
 - Email scheduler - codzienne automatyczne powiadomienie email o ilości zaplanowanych spacerów z psami
+- Email Scheduler z pogodą na weekend - w każdy piątek wysyła maila do wszystkich wolontariuszy w bazie
+- Swagger pod adresem http://localhost:8080/swagger-ui/index.html
 - Wzorce projektowe:
     - Fasada
     - Builder
     - Singleton
 
-###
-![Swagger](src/main/resources/image/swagger.png)]
+
+### Scheduler z pogodą na weekend:
+![Scheduler](src/main/resources/image/mail.png)
+
+
+### Lista endpointów:
+![Swagger](src/main/resources/image/swagger.png)
+
+## Autor
+Grzegorz Gawrysiak
+
+https://www.linkedin.com/in/gawrysiak
