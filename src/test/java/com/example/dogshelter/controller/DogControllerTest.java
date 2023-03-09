@@ -16,8 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
@@ -35,7 +36,6 @@ class DogControllerTest {
     void shouldFetchEmptyList() throws Exception {
         // Given
         when(dogFacade.getAllDogs()).thenReturn(List.of());
-
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
@@ -80,4 +80,40 @@ class DogControllerTest {
 
     }
 
+    @Test
+    void shouldPatchDog() throws Exception {
+        //Given
+        DogDto ali = new DogDto(1L, "Ali", "Mixed", false);
+        when(dogFacade.updateDog(any(DogDto.class))).thenReturn(ali);
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(ali);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch("/v1/dogs")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+                        .content(jsonContent))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+               // .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("Ali")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.breed", Matchers.is("Mixed")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.inShelter", Matchers.is(false)));
+    }
+
+
+
+    @Test
+    void shouldDeleteDog() throws Exception {
+        //Given
+        doNothing().when(dogFacade).deleteDog(anyLong());
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/v1/dogs/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200));
+    }
 }
