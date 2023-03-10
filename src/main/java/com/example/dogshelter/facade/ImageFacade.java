@@ -27,4 +27,8 @@ public class ImageFacade {
     public ImageDto uploadImage(ImageDto imageDto) throws IOException {
         return cloudinaryService.uploadAndSaveToDb(imageDto.getUrl());
     }
+
+    public void deleteImage(String url){
+        cloudinaryService.deleteImage(url);
+    }
 }

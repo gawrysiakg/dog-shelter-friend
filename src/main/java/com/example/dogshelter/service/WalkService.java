@@ -49,7 +49,7 @@ public class WalkService {
 
     public void addNewWalk(Walk walk) throws WalkNotFoundException, VolunteerNotFoundException {
         Walk walkSaved = walkRepository.save(walk);
-        sendConfirmToVolunteer(walk);
+        sendConfirmToVolunteer(walkSaved);
         sendConfirmToAdmin(walkSaved);
     }
 
@@ -108,7 +108,7 @@ public class WalkService {
 
     private void sendConfirmToVolunteer(Walk walk) throws WalkNotFoundException, VolunteerNotFoundException {
         Walk walk1 = walkRepository.findById(walk.getId()).orElseThrow(WalkNotFoundException::new);
-        Volunteer volunteer = volunteerRepository.findById(walk1.getId()).orElseThrow(VolunteerNotFoundException::new);
+        Volunteer volunteer = volunteerRepository.findById(walk1.getVolunteer().getId()).orElseThrow(VolunteerNotFoundException::new);
         simpleEmailService.send(
                 new Mail.MailBuilder()
                         .mailTo(volunteer.getEmail())

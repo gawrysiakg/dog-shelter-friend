@@ -44,4 +44,11 @@ public class Dog {
         this.inShelter = inShelter;
 
     }
+
+    public Dog(Long id, String name, String dogBreed, boolean inShelter) {
+        this.id = id;
+        this.name = name;
+        this.dogBreed = dogBreed;
+        this.inShelter = inShelter;
+    }
 }

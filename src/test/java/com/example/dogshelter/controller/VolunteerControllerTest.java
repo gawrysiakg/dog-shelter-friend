@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +61,41 @@ class VolunteerControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].name", Matchers.is("bobbuilder")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].email", Matchers.is("123@bob.pl")));
     }
+
+    @Test
+    void shouldGetVolunteerById() throws Exception {
+        //Given
+        VolunteerDto first = new VolunteerDto(1L, "Andy", "Stender", "andy01", "pass123", "as@dy.pl", 544744744, Role.USER);
+        when(volunteerFacade.getVolunteerById(first.getId())).thenReturn(first);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/volunteers/"+first.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is("Andy")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.is("Stender")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is("USER")));
+    }
+
+    @Test
+    void shouldGetVolunteerByUsername() throws Exception {
+        //Given
+        VolunteerDto first = new VolunteerDto(1L, "Andy", "Stender", "andy01", "pass123", "as@dy.pl", 544744744, Role.USER);
+        when(volunteerFacade.getVolunteerByName(any())).thenReturn(first);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/volunteers/login/"+first.getName())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is("Andy")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.is("Stender")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is("USER")));
+    }
+
 
 
     @Test

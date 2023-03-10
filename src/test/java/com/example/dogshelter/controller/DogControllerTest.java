@@ -13,11 +13,8 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -60,6 +57,36 @@ class DogControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].name", Matchers.is("Ares")));
+    }
+
+    @Test
+    void shouldGetDogById() throws Exception {
+        //Given
+        DogDto ali = new DogDto(1L, "Ali", "Mixed", false);
+        when(dogFacade.getDogById(anyLong())).thenReturn(ali);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/dogs/"+ali.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("Ali")));
+    }
+
+    @Test
+    void shouldGetDogByName() throws Exception {
+        //Given
+        DogDto ali = new DogDto(1L, "Ali", "Mixed", false);
+        when(dogFacade.getDogByName(anyString())).thenReturn(ali);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/dogs/name/"+ali.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("Ali")));
     }
 
 
