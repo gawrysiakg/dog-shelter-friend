@@ -33,7 +33,7 @@ public class DogController {
         return ResponseEntity.ok(dogFacade.getDogById(dogId));
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<DogDto> getDogByName(@PathVariable String name) throws DogNotFoundException {
         return ResponseEntity.ok(dogFacade.getDogByName(name));
     }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class WeatherController {
 
-private final WeatherFacade weatherFacade;
+    private final WeatherFacade weatherFacade;
 
     @GetMapping
     public ResponseEntity<Weather> fetchWeather(){

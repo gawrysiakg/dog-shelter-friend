@@ -4,6 +4,7 @@ import com.example.dogshelter.api.cloudinary.CloudinaryClient;
 import com.example.dogshelter.config.AdminConfig;
 import com.example.dogshelter.domain.Mail;
 import com.example.dogshelter.dto.ImageDto;
+import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class CloudinaryService {
     private final CloudinaryClient cloudinaryClient;
     private final SimpleEmailService simpleEmailService;
     private final AdminConfig adminConfig;
+    private final CloudinaryRepository cloudinaryRepository;
     public static final String UPLOAD_SUBJECT = "New image uploaded!";
 
 
@@ -36,5 +38,7 @@ public class CloudinaryService {
     }
 
 
-
+    public void deleteImage(String url) {
+        cloudinaryRepository.deleteByImageAddress(url);
+    }
 }

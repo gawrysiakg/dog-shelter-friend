@@ -86,6 +86,22 @@ class WalkControllerTest {
     }
 
     @Test
+    void shouldFetchWalkById() throws Exception {
+        // Given
+         WalkDto walkDto = new WalkDto(1L, LocalDate.of(2023, 03, 10), "andy001", "Pola");
+        when(walkFacade.getWalk(walkDto.getId())).thenReturn(walkDto);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/walks/"+walkDto.getId()))
+                .andExpect(MockMvcResultMatchers.status().is(200)) // or isOk()
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.walkDate", Matchers.is("2023-03-10")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.volunteerName", Matchers.is("andy001")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.dogName", Matchers.is("Pola")));
+    }
+
+    @Test
     void shouldAddWalk() throws Exception {
         //Given
         WalkDto walk = new WalkDto(1L, LocalDate.of(2023, 03, 10), "andy001", "Pola") ;
