@@ -12,6 +12,7 @@ public class RandomDogClient {
     private String randomDogByBreed = "https://dog.ceo/api/breed/";
     private final RestTemplate restTemplate;
 
+    // functionality in frontend - work in progress
     public RandomDog getRandomDog(String breed){
        return restTemplate.getForObject(randomDogByBreed+breed+"/images/random", RandomDog.class);
     }

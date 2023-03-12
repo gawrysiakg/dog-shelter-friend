@@ -35,7 +35,6 @@ public class VolunteerService {
         return volunteerRepository.save(volunteer);
     }
 
-
     public Volunteer updateVolunteer(VolunteerDto volunteerDto) throws VolunteerNotFoundException {
         Volunteer volunteerFromRepo = volunteerRepository.findById(volunteerDto.getId()).orElseThrow(VolunteerNotFoundException::new);
         volunteerFromRepo.setFirstName(volunteerDto.getFirstName());

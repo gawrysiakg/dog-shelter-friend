@@ -18,10 +18,9 @@ public enum DogBreedFromString {
     SHIH_TZU("Shih tzu");
 
     private  final String name;
-     DogBreedFromString(String name){
+    DogBreedFromString(String name){
         this.name=name;
     }
-
 
 
     DogBreedFromString dogBreedFromString(String name) {

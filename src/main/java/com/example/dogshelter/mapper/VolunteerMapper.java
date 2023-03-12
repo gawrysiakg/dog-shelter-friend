@@ -23,7 +23,6 @@ public class VolunteerMapper {
                 volunteer.getPhone(),
                 volunteer.getRole());
         return volunteerDto;
-
     }
 
     public Volunteer mapToVolunteer(VolunteerDto volunteerDto) {
@@ -49,7 +48,6 @@ public class VolunteerMapper {
         if(!(volunteerDto.getPhone()==0)){
             volunteer.setPhone(volunteerDto.getPhone());
         }
-
         return volunteer;
     }
 

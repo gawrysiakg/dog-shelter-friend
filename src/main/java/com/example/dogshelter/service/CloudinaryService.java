@@ -2,6 +2,7 @@ package com.example.dogshelter.service;
 
 import com.example.dogshelter.api.cloudinary.CloudinaryClient;
 import com.example.dogshelter.config.AdminConfig;
+import com.example.dogshelter.domain.Image;
 import com.example.dogshelter.domain.Mail;
 import com.example.dogshelter.dto.ImageDto;
 import com.example.dogshelter.repository.CloudinaryRepository;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,8 +22,6 @@ public class CloudinaryService {
     private final AdminConfig adminConfig;
     private final CloudinaryRepository cloudinaryRepository;
     public static final String UPLOAD_SUBJECT = "New image uploaded!";
-
-
 
     public ImageDto uploadAndSaveToDb(String path) throws IOException {
         ImageDto imageDto = cloudinaryClient.uploadFileAndSaveToDb(path);
@@ -41,4 +41,9 @@ public class CloudinaryService {
     public void deleteImage(String url) {
         cloudinaryRepository.deleteByImageAddress(url);
     }
+
+    public List<Image> findAll() {
+        return cloudinaryRepository.findAll();
+    }
+
 }

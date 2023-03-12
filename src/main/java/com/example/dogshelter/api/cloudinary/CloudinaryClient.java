@@ -9,8 +9,6 @@ import com.example.dogshelter.repository.CloudinaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -18,7 +16,6 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class CloudinaryClient {
-
 
     private Cloudinary cloudinary;
     private CloudinaryRepository cloudinaryRepository;
@@ -36,7 +33,6 @@ public class CloudinaryClient {
                 "api_secret", cloudinaryConfig.getApiSecretValue()));
     }
 
-
     public ImageDto uploadFileAndSaveToDb(String path) throws IOException {
         File file = new File(path);
         Map uploadResult = null;
@@ -44,10 +40,5 @@ public class CloudinaryClient {
             Image savedImage = cloudinaryRepository.save(new Image(uploadResult.get("url").toString()));
             return imageMapper.mapToImageDto(savedImage);
     }
-
-
-
-
-
 
 }

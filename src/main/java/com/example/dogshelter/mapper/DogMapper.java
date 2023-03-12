@@ -21,7 +21,6 @@ public class DogMapper {
                 dog.getName(),
                 dog.getDogBreed(),
                 dog.isInShelter());
-
     }
 
     public Dog mapToDog(DogDto dogDto) {

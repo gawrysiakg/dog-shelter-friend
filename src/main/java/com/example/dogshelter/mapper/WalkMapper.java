@@ -3,7 +3,6 @@ package com.example.dogshelter.mapper;
 import com.example.dogshelter.domain.Dog;
 import com.example.dogshelter.domain.Volunteer;
 import com.example.dogshelter.domain.Walk;
-import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.dto.WalkDto;
 import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
@@ -11,7 +10,6 @@ import com.example.dogshelter.repository.DogRepository;
 import com.example.dogshelter.repository.VolunteerRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

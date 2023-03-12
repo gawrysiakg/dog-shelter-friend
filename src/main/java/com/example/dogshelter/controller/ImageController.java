@@ -4,6 +4,7 @@ import com.example.dogshelter.api.cloudinary.CloudinaryClient;
 import com.example.dogshelter.dto.ImageDto;
 import com.example.dogshelter.facade.ImageFacade;
 import com.example.dogshelter.repository.CloudinaryRepository;
+import com.example.dogshelter.service.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,6 @@ import java.util.List;
 @CrossOrigin("*")
 public class ImageController {
 
-    private final CloudinaryClient cloudinaryClient;
-    private final CloudinaryRepository cloudinaryRepository;
     private final ImageFacade imageFacade;
 
 
@@ -27,10 +26,6 @@ public class ImageController {
         return ResponseEntity.ok(imageFacade.findAll());
     }
 
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
-//        return ResponseEntity.ok(cloudinaryClient.uploadFileAndSaveToDb(imageDto.getUrl()));
-//    }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImageDto> uploadImage(@RequestBody ImageDto imageDto) throws IOException {
         return ResponseEntity.ok(imageFacade.uploadImage(imageDto));
@@ -38,7 +33,7 @@ public class ImageController {
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteImage(@RequestBody ImageDto imageDto) {
-        cloudinaryRepository.deleteByImageAddress(imageDto.getUrl());
+       imageFacade.deleteImage(imageDto.getUrl());
         return ResponseEntity.ok().build();
     }
 
