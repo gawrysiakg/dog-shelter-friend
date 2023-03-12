@@ -6,7 +6,6 @@ import com.example.dogshelter.domain.Mail;
 import com.example.dogshelter.domain.Volunteer;
 import com.example.dogshelter.domain.Walk;
 import com.example.dogshelter.dto.WalkDto;
-import com.example.dogshelter.dto.WalkFinishDto;
 import com.example.dogshelter.exception.DogNotFoundException;
 import com.example.dogshelter.exception.VolunteerNotFoundException;
 import com.example.dogshelter.exception.WalkNotFoundException;
@@ -28,7 +27,6 @@ public class WalkService {
     private final DogRepository dogRepository;
     private final SimpleEmailService simpleEmailService;
     private final AdminConfig adminConfig;
-
     public static final String SUBJECT = "New walk for volunteer";
 
     public List<Walk> findAllWalks() {
@@ -129,7 +127,6 @@ public class WalkService {
     }
 
     public long count() {
-
         return walkRepository.count();
     }
 }

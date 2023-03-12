@@ -1,5 +1,6 @@
 package com.example.dogshelter.api.cloudinary;
 
+import com.example.dogshelter.exception.DogNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,6 @@ class CloudinaryClientTest {
 
     @Test
     void uploadFileAndSaveToDb() throws IOException {
-        cloudinaryClient.uploadFileAndSaveToDb("C:/pliki/me.jpg");
-
+        assertThrows(IOException.class, () ->  cloudinaryClient.uploadFileAndSaveToDb("C:/thisFileDontExist.jpg"));
     }
 }

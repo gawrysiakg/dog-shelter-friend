@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,6 @@ public class Dog {
         this.name = name;
         this.dogBreed = dogBreed;
         this.inShelter = inShelter;
-
     }
 
     public Dog(Long id, String name, String dogBreed, boolean inShelter) {

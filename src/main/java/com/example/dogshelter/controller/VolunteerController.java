@@ -39,7 +39,6 @@ public class VolunteerController {
         return ResponseEntity.ok(volunteerFacade.getVolunteerByEmail(mail));
     }
 
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addVolunteer(@RequestBody VolunteerDto volunteerDto) {
         volunteerFacade.addNewVolunteer(volunteerDto);

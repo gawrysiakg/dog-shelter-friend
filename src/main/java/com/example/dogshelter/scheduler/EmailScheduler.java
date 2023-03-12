@@ -21,10 +21,8 @@ public class EmailScheduler {
     private final SimpleEmailService simpleEmailService;
     private final AdminConfig adminConfig;
     private final WalkService walkService;
-
     private final VolunteerService volunteerService;
     private final WeatherService weatherService;
-
     private static final String SUBJECT = "Dog Shelter Friend: Once a day email";
     private static final String SUBJECT2 = "Dog Shelter: Visit us this weekend! ";
 
@@ -72,5 +70,4 @@ public class EmailScheduler {
                "Probability of precipitation: "+weather.getDaily().getPrecipitationProbabilityMax().get(2)+weather.getDailyUnits().getPrecipitationProbabilityMax()+"\n" +
                "See You later!";
         }
-
 }

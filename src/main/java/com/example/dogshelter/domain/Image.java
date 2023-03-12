@@ -3,7 +3,6 @@ package com.example.dogshelter.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter
@@ -24,7 +23,7 @@ public class Image {
         this.imageAddress = imageAddress;
    }
 
-   public Image() {
+    public Image() {
     }
 
 

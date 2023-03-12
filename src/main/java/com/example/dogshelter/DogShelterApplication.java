@@ -14,5 +14,4 @@ public class DogShelterApplication {
         SpringApplication.run(DogShelterApplication.class, args);
     }
 
-
 }

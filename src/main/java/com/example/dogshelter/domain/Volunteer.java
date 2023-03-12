@@ -33,7 +33,6 @@ public class Volunteer {
     @Column(name = "PASSWORD")
     private String password;
 
-
     @Column(name = "EMAIL")
     private String email;
 

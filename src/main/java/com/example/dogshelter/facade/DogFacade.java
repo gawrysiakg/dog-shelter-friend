@@ -7,7 +7,6 @@ import com.example.dogshelter.mapper.DogMapper;
 import com.example.dogshelter.service.DogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -34,7 +33,7 @@ public class DogFacade {
 
     public DogDto getDogById(Long id) throws DogNotFoundException {
             return dogMapper.mapToDogDto( dogService.getDogById(id));
-        }
+    }
 
     public void addNewDog(DogDto dogDto) {
         Dog dog = dogMapper.mapToDog(dogDto);

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,7 +20,6 @@ public class Walk {
     @Column(name = "ID", unique = true)
     private Long id;
 
-
     @Column(name = "WALK_DATE")
     private LocalDate walkDate;
 
@@ -32,6 +30,4 @@ public class Walk {
     @ManyToOne
     @JoinColumn(name = "DOG_ID")
     private Dog dog;
-
-
 }
