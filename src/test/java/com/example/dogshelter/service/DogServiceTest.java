@@ -44,7 +44,7 @@ class DogServiceTest {
         //Given
         List<Dog> dogMock = List.of(new Dog(1L, "Remo", "Mixed", false),
                                     new Dog(2L, "Luna", "Mixed", true));
-        when(dogService.getAllDogs()).thenReturn(dogMock);
+        when(dogRepository.findAll()).thenReturn(dogMock);
         //When
         List<Dog> dogs = dogService.getAllDogs();
         //Then
@@ -59,7 +59,7 @@ class DogServiceTest {
         //Given
         List<Dog> dogMock = List.of(new Dog(1L, "Remo", "Mixed", false),
                 new Dog(2L, "Luna", "Mixed", true));
-        when(dogService.getAllDogsByBreed("Mixed")).thenReturn(dogMock);
+        when(dogRepository.findAllByDogBreed("Mixed")).thenReturn(dogMock);
         //When
         List<Dog> dogs = dogService.getAllDogsByBreed("Mixed");
         //Then
@@ -68,7 +68,7 @@ class DogServiceTest {
     }
 
     @Test
-    void shouldGetDobById() throws DogNotFoundException {
+    void shouldGetDogById() throws DogNotFoundException {
         //Given
         Dog dogMock = new Dog(13L, "Remo", "Mixed", false);
         when(dogRepository.findById(dogMock.getId())).thenReturn(Optional.of(dogMock));
