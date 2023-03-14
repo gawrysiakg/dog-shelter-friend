@@ -9,11 +9,12 @@ import com.example.dogshelter.service.VolunteerService;
 import com.example.dogshelter.service.WalkService;
 import com.example.dogshelter.service.WeatherService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class EmailScheduler {
@@ -38,6 +39,7 @@ public class EmailScheduler {
                         .subject(SUBJECT)
                         .message("For the next few days we have "  + size + " walks planned by Volunteers")
                         .build());
+       log.info("Email has been sent.");
     }
 
 
@@ -55,6 +57,7 @@ public class EmailScheduler {
                             .message(mailMessage(weather, volunteer))
                             .build());
         }
+        log.info("Email has been sent.");
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.dogshelter.controller;
 
+import com.example.dogshelter.dto.DogBreedDto;
 import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.facade.DogFacade;
 import com.google.gson.Gson;
@@ -53,6 +54,30 @@ class DogControllerTest {
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .get("/v1/dogs"))
+                .andExpect(MockMvcResultMatchers.status().is(200)) // or isOk()
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].name", Matchers.is("Ares")));
+    }
+
+    @Test
+    void shouldFetchDogListByBreed() throws Exception {
+        // Given
+        DogBreedDto dogBreedDto = new DogBreedDto();
+        dogBreedDto.setBreed("Mixed");
+        List<DogDto> dogDtoList = List.of(
+                new DogDto(1L, "Ali", "Mixed", false),
+                new DogDto(2L, "Ares", "Mixed", true));
+        when(dogFacade.getAllDogsByBreed("Mixed")).thenReturn(dogDtoList);
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(dogBreedDto);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/dogs")
+                        .characterEncoding("UTF-8")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().is(200)) // or isOk()
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
