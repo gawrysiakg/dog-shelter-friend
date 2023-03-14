@@ -27,13 +27,7 @@ public class CloudinaryService {
         ImageDto imageDto = cloudinaryClient.uploadFileAndSaveToDb(path);
 
         Optional.ofNullable(imageDto).ifPresent((image)->
-                    simpleEmailService.send(
-                         new Mail.MailBuilder()
-                            .mailTo(adminConfig.getAdminMail())
-                            .subject(UPLOAD_SUBJECT)
-                            .message("New image uploaded. You can find it in Cloudinary service, in shelter gallery" +
-                                    "or by url: "+imageDto.getUrl())
-                            .build()));
+                   sendEmail(imageDto));
         return imageDto;
     }
 
@@ -44,6 +38,16 @@ public class CloudinaryService {
 
     public List<Image> findAll() {
         return cloudinaryRepository.findAll();
+    }
+
+    private void sendEmail(ImageDto imageDto){
+        simpleEmailService.send(
+                new Mail.MailBuilder()
+                        .mailTo(adminConfig.getAdminMail())
+                        .subject(UPLOAD_SUBJECT)
+                        .message("New image uploaded. You can find it in Cloudinary service, in shelter gallery" +
+                                "or by url: "+imageDto.getUrl())
+                        .build());
     }
 
 }

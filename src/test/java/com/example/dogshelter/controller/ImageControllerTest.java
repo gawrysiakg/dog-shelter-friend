@@ -89,11 +89,20 @@ public class ImageControllerTest {
 
     @Test
     void shouldDeleteImage() throws Exception {
+        //Given
+        ImageDto imageDto = new ImageDto();
+        imageDto.setUrl("www.asdf.pl");
         String url= "www.picture.pl/exampledog.jpg";
-        doNothing().when(imageFacade).deleteImage(url);
+        doNothing().when(imageFacade).deleteImage(imageDto.getUrl());
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(imageDto);
+        //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/gallery"))
+                        .delete("/v1/gallery")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+                        .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 

@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WalkServiceTest {
@@ -70,13 +69,31 @@ class WalkServiceTest {
     }
 
     @Test
+    void shouldFindAllPlannedWalks() {
+        //Given
+        Volunteer volunteer = new Volunteer(2L, "Ben", "Ten", "ben", "ben0101","ben@am.pl", 42342544, Role.ADMIN);
+        Dog dog = new Dog(13L, "Remo", "Labrador", false);
+        List<Walk> walkMock = List.of(new Walk(1L, LocalDate.of(2023, 03, 10), volunteer,  dog),
+                new Walk(2L, LocalDate.of(2023, 03, 12), volunteer,  dog));
+        when(walkRepository.findAllByWalkDateIsAfter(any(LocalDate.class))).thenReturn(walkMock);
+        //When
+        List<Walk> walks = walkService.findAllPlannedWalks();
+        //Then
+        assertNotNull(walks);
+        assertEquals(2, walks.size());
+        assertEquals( LocalDate.of(2023, 03, 10), walks.get(0).getWalkDate());
+        assertEquals("Ben", walks.get(1).getVolunteer().getFirstName());
+        assertEquals("Ten", walks.get(1).getVolunteer().getLastName());
+    }
+
+    @Test
     void shouldGetPlannedWalkListForVolunteer()  {
         //Given
         Volunteer volunteer = new Volunteer(2L, "Ben", "Ten", "ben", "ben0101","ben@am.pl", 42342544, Role.ADMIN);
         Dog dog = new Dog(13L, "Remo", "Labrador", false);
         List<Walk> walkMock = List.of(new Walk(1L, LocalDate.of(2023, 03, 10), volunteer,  dog),
                 new Walk(2L, LocalDate.of(2023, 03, 12), volunteer,  dog));
-        when(walkRepository.findAllByVolunteerNameAndWalkDateIsAfter(anyString(), LocalDate.of(2023, 03, 12) )).thenReturn(walkMock);
+        when(walkRepository.findAllByVolunteerNameAndWalkDateIsAfter("ben",  LocalDate.now().minusDays(1) )).thenReturn(walkMock);
         //When
         List<Walk> result = walkService.getPlannedWalksForVolunteer("ben");
         //Then
@@ -126,5 +143,4 @@ class WalkServiceTest {
         assertNotNull(walks);
         assertEquals(List.of(), walks);
     }
-
 }

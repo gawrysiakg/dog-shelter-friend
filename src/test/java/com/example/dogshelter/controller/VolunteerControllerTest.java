@@ -65,7 +65,15 @@ class VolunteerControllerTest {
     @Test
     void shouldGetVolunteerById() throws Exception {
         //Given
-        VolunteerDto first = new VolunteerDto(1L, "Andy", "Stender", "andy01", "pass123", "as@dy.pl", 544744744, Role.USER);
+        VolunteerDto first = new VolunteerDto();
+        first.setId(1L);
+        first.setFirstName("Andy");
+        first.setLastName("Stender");
+        first.setName("andy01");
+        first.setPassword("pass123");
+        first.setEmail("as@dy.pl");
+        first.setPhone(544744744);
+        first.setRole(Role.USER);
         when(volunteerFacade.getVolunteerById(first.getId())).thenReturn(first);
         //When & Then
         mockMvc
@@ -88,6 +96,23 @@ class VolunteerControllerTest {
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .get("/v1/volunteers/login/"+first.getName())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is("Andy")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.is("Stender")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is("USER")));
+    }
+
+    @Test
+    void shouldGetVolunteerByEmail() throws Exception {
+        //Given
+        VolunteerDto first = new VolunteerDto(1L, "Andy", "Stender", "andy01", "pass123", "as@dy.pl", 544744744, Role.USER);
+        when(volunteerFacade.getVolunteerByEmail(any())).thenReturn(first);
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/volunteers/email/"+first.getEmail())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))

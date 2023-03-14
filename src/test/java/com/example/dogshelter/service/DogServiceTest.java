@@ -80,6 +80,18 @@ class DogServiceTest {
     }
 
     @Test
+    void shouldGetDogByName() throws DogNotFoundException {
+        //Given
+        Dog dogMock = new Dog(13L, "Remo", "Mixed", false);
+        when(dogRepository.findDogByName(dogMock.getName())).thenReturn(Optional.of(dogMock));
+        //When
+        Dog dog = dogService.getDogByName(dogMock.getName());
+        //Then
+        assertNotNull(dog);
+        assertEquals("Remo", dog.getName());
+    }
+
+    @Test
     void shouldSaveDog(){
         //Given
         Dog dogMock = new Dog(13L, "Remo", "Labrador", false);

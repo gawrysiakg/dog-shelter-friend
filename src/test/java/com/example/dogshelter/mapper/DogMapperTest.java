@@ -1,6 +1,7 @@
 package com.example.dogshelter.mapper;
 
 import com.example.dogshelter.domain.Dog;
+import com.example.dogshelter.dto.DogBreedDto;
 import com.example.dogshelter.dto.DogDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ class DogMapperTest {
     @Test
     void shouldMapToDog(){
         //Given
-        DogDto dogDto = new DogDto(1L, "Ares", "Labrador", true);
+        DogBreedDto dogBreedDto = new DogBreedDto("Labrador");
+        DogDto dogDto = new DogDto(1L, "Ares", dogBreedDto.getBreed(), true);
         //When
         Dog dog = dogMapper.mapToDog(dogDto);
         //Then
