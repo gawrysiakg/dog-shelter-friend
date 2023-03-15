@@ -33,7 +33,6 @@ class WalkServiceTest {
     private AdminConfig adminConfig;
 
 
-
     @Test
     void shouldReturnEmptyList() {
         //Given & When

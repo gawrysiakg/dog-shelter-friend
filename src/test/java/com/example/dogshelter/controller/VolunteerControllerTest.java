@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
-
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -41,7 +40,6 @@ class VolunteerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(200)) // or isOk()
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(0)));
     }
-
 
     @Test
     void shouldFetchVolunteersList() throws Exception {
@@ -121,8 +119,6 @@ class VolunteerControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is("USER")));
     }
 
-
-
     @Test
     void shouldAddVolunteer() throws Exception {
         //Given
@@ -138,7 +134,6 @@ class VolunteerControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
-
 
     @Test
     void shouldPatchVolunteer() throws Exception {
@@ -160,7 +155,6 @@ class VolunteerControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.is("Stender")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is("USER")));
     }
-
 
     @Test
     void shouldDeleteVolunteer() throws Exception {

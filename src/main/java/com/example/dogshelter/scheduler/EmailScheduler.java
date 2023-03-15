@@ -30,27 +30,27 @@ public class EmailScheduler {
 
 
    @Scheduled(cron = "0 0 10 * * *")
-   // @Scheduled(fixedDelay = 10000) //for testing 1 mail/10 seconds
+    //@Scheduled(fixedDelay = 30000) //for testing 1 mail/10 seconds
     public void sendInformationEmail() {
         long size = walkService.findAllPlannedWalks().size();
         simpleEmailService.send(
                 new Mail.MailBuilder()
                         .mailTo(adminConfig.getAdminMail())
                         .subject(SUBJECT)
-                        .message("For the next few days we have "  + size + " walks planned by Volunteers")
+                        .message("<p>For the next few days we have "  + size + " walks planned by Volunteers</p>")
                         .build());
        log.info("Email has been sent.");
     }
 
 
     @Scheduled(cron = "0 0 12 ? * FRI")
-    // @Scheduled(fixedDelay = 100000) //for testing 1 mail per minute
+    //@Scheduled(fixedDelay = 100000) //for testing 1 mail per minute
     public void sendMessageWithWeather() {
         List<Volunteer> allVolunteers = volunteerService.getAllVolunteers();
         Weather weather = weatherService.getWeather();
 
         for(Volunteer volunteer : allVolunteers){
-            simpleEmailService.send(
+            simpleEmailService.sendScheduledEmailWithWeather(
                     new Mail.MailBuilder()
                             .mailTo(volunteer.getEmail())
                             .subject(SUBJECT2)
@@ -63,14 +63,14 @@ public class EmailScheduler {
 
 
        private String mailMessage(Weather weather, Volunteer volunteer){
-       return "Hello "+volunteer.getFirstName()+"! \n" +
-               "Our dogs are waiting for You this weekend. \n" +
-               "This is the weather for Saturday: \n" +
-               "Temperature: "+weather.getDaily().getTemperature2mMax().get(1)+weather.getDailyUnits().getTemperature2mMax()+"\n" +
-               "Probability of precipitation: "+weather.getDaily().getPrecipitationProbabilityMax().get(1)+weather.getDailyUnits().getPrecipitationProbabilityMax()+"\n" +
-               "This is the weather for Sunday: \n" +
-               "Temperature: "+weather.getDaily().getTemperature2mMax().get(2)+weather.getDailyUnits().getTemperature2mMax()+"\n" +
-               "Probability of precipitation: "+weather.getDaily().getPrecipitationProbabilityMax().get(2)+weather.getDailyUnits().getPrecipitationProbabilityMax()+"\n" +
-               "See You later!";
+       return "<p>Hello "+volunteer.getFirstName()+"! <br>" +
+               "Our dogs are waiting for You this weekend. <br></p>" +
+               "<p>This is the weather for Saturday: <br>" +
+               "Temperature: "+weather.getDaily().getTemperature2mMax().get(1)+weather.getDailyUnits().getTemperature2mMax()+"<br>" +
+               "Probability of precipitation: "+weather.getDaily().getPrecipitationProbabilityMax().get(1)+weather.getDailyUnits().getPrecipitationProbabilityMax()+"<br>" +
+               "</p><p>This is the weather for Sunday: <br>" +
+               "Temperature: "+weather.getDaily().getTemperature2mMax().get(2)+weather.getDailyUnits().getTemperature2mMax()+"<br>" +
+               "Probability of precipitation: "+weather.getDaily().getPrecipitationProbabilityMax().get(2)+weather.getDailyUnits().getPrecipitationProbabilityMax()+"</p>" +
+               "<p>See You later... in Shelter!</p><p></p>";
         }
 }

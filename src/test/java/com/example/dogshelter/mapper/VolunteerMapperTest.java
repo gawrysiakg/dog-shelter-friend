@@ -90,8 +90,4 @@ class VolunteerMapperTest {
         assertEquals("Solton", volunteer.get(1).getLastName());
     }
 
-
-
-
-
 }

@@ -51,6 +51,7 @@ oraz:
 - Email scheduler - codzienne automatyczne powiadomienie email o ilości zaplanowanych spacerów z psami
 - Email Scheduler z pogodą na weekend - w każdy piątek wysyła maila do wszystkich wolontariuszy w bazie
 - Swagger pod adresem http://localhost:8080/swagger-ui/index.html
+- Pokrycie testami - ponad 70% metod
 - Wzorce projektowe:
     - Fasada
     - Builder
@@ -59,6 +60,10 @@ oraz:
 
 ### Scheduler z pogodą na weekend:
 ![Scheduler](src/main/resources/image/mail.png)
+
+
+### Test Coverage:
+![Coverage](src/main/resources/image/test_coverage.png)
 
 
 ### Lista endpointów:

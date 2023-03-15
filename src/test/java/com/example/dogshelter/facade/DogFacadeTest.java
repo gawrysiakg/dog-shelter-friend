@@ -110,13 +110,20 @@ class DogFacadeTest {
         assertEquals("Mixed", dog.getBreed());
     }
 
-
-
-
-
-
-
-
-
+    @Test
+    void shouldDeleteDog() throws DogNotFoundException {
+        //Given
+        Dog dogMock = new Dog(1L, "Remo", "Mixed", false);
+        DogDto dogDtoMock = new DogDto(1L, "Remo", "Mixed", false);
+        when(dogService.save(dogMock)).thenReturn(dogMock);
+        when(dogService.getAllDogs()).thenReturn(List.of());
+        when(dogMapper.mapToDog(dogDtoMock)).thenReturn(dogMock);
+        dogFacade.addNewDog(dogDtoMock);
+        //When
+        dogFacade.deleteDog(dogDtoMock.getId());
+        List<Dog> dogs = dogService.getAllDogs();
+        //Then
+        assertEquals(dogs.size(), 0);
+    }
 
 }

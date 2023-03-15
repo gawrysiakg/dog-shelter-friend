@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(DogController.class)
 class DogControllerTest {
 
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -41,7 +40,6 @@ class DogControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(200)) // or isOk()
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(0)));
     }
-
 
     @Test
     void shouldFetchDogList() throws Exception {
@@ -155,12 +153,10 @@ class DogControllerTest {
     }
 
 
-
     @Test
     void shouldDeleteDog() throws Exception {
         //Given
         doNothing().when(dogFacade).deleteDog(anyLong());
-
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders

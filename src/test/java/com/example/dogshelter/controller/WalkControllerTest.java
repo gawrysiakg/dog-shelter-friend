@@ -166,8 +166,7 @@ class WalkControllerTest {
                     @Override
                     public JsonElement serialize(LocalDate localDate, Type type, JsonSerializationContext jsonSerializationContext) {
                         return new JsonPrimitive(localDate.format(DateTimeFormatter.ISO_LOCAL_DATE));
-                    }
-                })
+                    }  })
                 .create();
         String jsonContent = gson.toJson(walk);
         //When & Then
