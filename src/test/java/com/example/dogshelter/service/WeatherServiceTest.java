@@ -37,7 +37,6 @@ class WeatherServiceTest {
         assertEquals(3.0, result.getDaily().getPrecipitationSum().get(0));
         assertEquals(0, result.getDaily().getPrecipitationProbabilityMax().get(0));
         assertEquals(7.0, result.getDaily().getWindspeed10mMax().get(0));
-
         assertEquals("date", result.getDailyUnits().getTime());
         assertEquals("°C", result.getDailyUnits().getTemperature2mMax());
         assertEquals("°C", result.getDailyUnits().getTemperature2mMin());

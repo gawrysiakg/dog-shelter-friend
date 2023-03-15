@@ -1,15 +1,12 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.api.cloudinary.CloudinaryClient;
-import com.example.dogshelter.dto.DogDto;
 import com.example.dogshelter.dto.ImageDto;
-import com.example.dogshelter.dto.WalkDto;
 import com.example.dogshelter.facade.ImageFacade;
 import com.example.dogshelter.repository.CloudinaryRepository;
 import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,10 +15,7 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.time.LocalDate;
 import java.util.List;
-
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -34,10 +28,6 @@ public class ImageControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ImageFacade imageFacade;
-    @MockBean
-    private CloudinaryClient cloudinaryClient;
-    @MockBean
-    private CloudinaryRepository cloudinaryRepository;
 
 
     @Test
@@ -105,6 +95,4 @@ public class ImageControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
-
-
 }
