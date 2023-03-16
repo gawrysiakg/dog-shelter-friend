@@ -30,7 +30,7 @@ public class EmailScheduler {
 
 
    @Scheduled(cron = "0 0 10 * * *")
-    //@Scheduled(fixedDelay = 30000) //for testing 1 mail/10 seconds
+    //@Scheduled(fixedDelay = 30000)
     public void sendInformationEmail() {
         long size = walkService.findAllPlannedWalks().size();
         simpleEmailService.send(
@@ -44,7 +44,7 @@ public class EmailScheduler {
 
 
     @Scheduled(cron = "0 0 12 ? * FRI")
-    //@Scheduled(fixedDelay = 100000) //for testing 1 mail per minute
+    //@Scheduled(fixedDelay = 100000)
     public void sendMessageWithWeather() {
         List<Volunteer> allVolunteers = volunteerService.getAllVolunteers();
         Weather weather = weatherService.getWeather();
