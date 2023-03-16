@@ -19,7 +19,7 @@ public class MailCreatorService {
     private AdminConfig adminConfig;
 
     public String buildVisitUsEmail(String message) {
-        String day_of_week = String.valueOf(LocalDate.now().getDayOfWeek());
+        String dayOfWeek = String.valueOf(LocalDate.now().getDayOfWeek());
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("dogs_url", "https://www.dogopedia.pl/");
@@ -31,17 +31,17 @@ public class MailCreatorService {
         context.setVariable("company_phone", adminConfig.getCompanyPhone());
         context.setVariable("preview_message", "Automatically generated message from DogShelter");
         context.setVariable("show_button", true);
-        context.setVariable("day_of_week", day_of_week);
+        context.setVariable("day_of_week", dayOfWeek);
         context.setVariable("admin_config", adminConfig);
 
         return templateEngine.process("mail/visit-us-this-weekend-mail", context);
     }
 
     public String buildInfoEmail(String message) {
-        String day_of_week = String.valueOf(LocalDate.now().getDayOfWeek());
+        String dayOfWeek = String.valueOf(LocalDate.now().getDayOfWeek());
         Context context = new Context();
         context.setVariable("message", message);
-        context.setVariable("day_of_week", day_of_week);
+        context.setVariable("day_of_week", dayOfWeek);
         context.setVariable("company_name", adminConfig.getCompanyName());
         context.setVariable("company_goal", adminConfig.getCompanyGoal());
         context.setVariable("company_email", adminConfig.getCompanyEmail());

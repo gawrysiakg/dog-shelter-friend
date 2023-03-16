@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class VolunteerMapper {
 
     public VolunteerDto mapToVolunteerDto(Volunteer volunteer) {
-        VolunteerDto volunteerDto = new VolunteerDto(
+        return new VolunteerDto(
                 volunteer.getId(),
                 volunteer.getFirstName(),
                 volunteer.getLastName(),
@@ -22,7 +22,6 @@ public class VolunteerMapper {
                 volunteer.getEmail(),
                 volunteer.getPhone(),
                 volunteer.getRole());
-        return volunteerDto;
     }
 
     public Volunteer mapToVolunteer(VolunteerDto volunteerDto) {
